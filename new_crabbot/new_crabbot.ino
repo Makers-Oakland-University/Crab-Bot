@@ -101,7 +101,7 @@ void initMotors() {
 }
 
 void motor_test() {
-  double step_delay = 50.0;
+  double step_delay = 100.0;
   Serial.println("Testing Front Left Motor");
   for (float a = -1.0; a < 1.0; a += 0.1) {
     driveMotors(a, 0, 0, 0);
@@ -162,9 +162,9 @@ void motor_test() {
 void inverseKinematics(double x, double y, double yaw) {
 
   //if you're wondering why these are reversed, I have no idea.
-  double x_vel = y / 20.0 ;
-  double y_vel = x / 20.0;
-  double psi = -(yaw / 20.0);
+  double x_vel = y / 35.0 ;
+  double y_vel = -(x / 35.0);
+  double psi = -(yaw / 10.0);
 
   //  double w1 =  A_CONST * x_vel - B_CONST * y_vel - C_CONST * psi;
   //  double w3 = A_CONST * x_vel + B_CONST * y_vel + C_CONST * psi;
@@ -178,17 +178,20 @@ void inverseKinematics(double x, double y, double yaw) {
 
   Serial.printf("Driving motors (%f, %f, %f, %f)\n", w1, w2, w3, w4);
 
-  driveMotors( w1, w2, w3, w4  );
+  driveMotors( w1, w2, w3, w4);
 }
 
-
-
 //sets motor values between -1 and 1 for front left, back left, back right, and front right respectively
-void driveMotors(float fl, float bl, float br, float fr) {
+void driveMotors(float front_left, float back_left, float back_right, float front_right) {
 
-  Serial.printf("Driving motors (%f, %f, %f, %f)\n", fl, bl, br, fr);
+  //constrain the motor values across their normal range. 
+  float fl = constrain(front_left, -1.0, 1.0); 
+  float bl = constrain(back_left, -1.0, 1.0); 
+  float br = constrain(back_right, -1.0, 1.0); 
+  float fr = constrain(front_right, -1.0, 1.0); 
 
-
+  Serial.printf("Driving motors (front-left %f, back-left %f, back-right %f, front-right %f)\n", fl, bl, br, fr);
+  
   //set direction and PWM for each motor
   //set PWM based on value from -1 to 1
   ledcWrite(FL_CHANNEL, (int)abs(255.0 * fl));
