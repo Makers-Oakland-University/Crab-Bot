@@ -10,6 +10,35 @@
    control crab-bot using two joysticks (buttons for sounds coming eventually)
 */
 
+
+#include <esp_now.h>
+#include <WiFi.h>
+
+typedef struct makers_controller_message {
+  int left_joy_y;
+  int left_joy_x;
+  int right_joy_y;
+  int right_joy_x;
+  int sw1;
+  int sw2;
+  int sw3;
+  int sw4;
+  int sw5;
+  int sw6;
+  int sw7;
+  int sw8;
+  int left_trig;
+  int right_trig;
+  int left_joy_sw;
+  int right_joy_sw;
+} makers_controller_message;
+
+
+// Create a struct_message called myData
+makers_controller_message myData;
+
+
+
 //motor driver connections
 #define FL_DIR 14
 #define FL_PWM 13
@@ -40,9 +69,11 @@ void setup()
 {
   Serial.begin(115200);
   initMotors();
-//  motor_test();
+  //  motor_test();
 
-  initWebControl();
+  //  initWebControl();
+  initESPNOW();
+
 }
 
 
@@ -52,7 +83,7 @@ void loop()
   //goes past this point
   //If you want to do anything then it'll have to happen inside of onNewUserInput()
   //or create another thread.
-  getWebInput();
+  //  getWebInput()/;
 }
 
 
@@ -162,9 +193,9 @@ void motor_test() {
 void inverseKinematics(double x, double y, double yaw) {
 
   //if you're wondering why these are reversed, I have no idea.
-  double x_vel = y / 35.0 ;
-  double y_vel = -(x / 35.0);
-  double psi = -(yaw / 10.0);
+  double x_vel = y / 10.0 ;
+  double y_vel = (x / 10.0);
+  double psi = (yaw / 10.0);
 
   //  double w1 =  A_CONST * x_vel - B_CONST * y_vel - C_CONST * psi;
   //  double w3 = A_CONST * x_vel + B_CONST * y_vel + C_CONST * psi;
@@ -184,14 +215,14 @@ void inverseKinematics(double x, double y, double yaw) {
 //sets motor values between -1 and 1 for front left, back left, back right, and front right respectively
 void driveMotors(float front_left, float back_left, float back_right, float front_right) {
 
-  //constrain the motor values across their normal range. 
-  float fl = constrain(front_left, -1.0, 1.0); 
-  float bl = constrain(back_left, -1.0, 1.0); 
-  float br = constrain(back_right, -1.0, 1.0); 
-  float fr = constrain(front_right, -1.0, 1.0); 
+  //constrain the motor values across their normal range.
+  float fl = constrain(front_left, -1.0, 1.0);
+  float bl = constrain(back_left, -1.0, 1.0);
+  float br = constrain(back_right, -1.0, 1.0);
+  float fr = constrain(front_right, -1.0, 1.0);
 
   Serial.printf("Driving motors (front-left %f, back-left %f, back-right %f, front-right %f)\n", fl, bl, br, fr);
-  
+
   //set direction and PWM for each motor
   //set PWM based on value from -1 to 1
   ledcWrite(FL_CHANNEL, (int)abs(255.0 * fl));

@@ -22,6 +22,8 @@ void handle_message(WebsocketsMessage msg) {
   onNewUserInput();
   //debug
   //Serial.printf("Data Rec x:%d y:%d yaw:%d ry:%d\n", x, y, yaw, right_stick_y);
+
+    
 }
 
 void initWebControl() {
