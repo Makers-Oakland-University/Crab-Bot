@@ -3,6 +3,8 @@
 #include <ArduinoWebsockets.h>
 #include <WiFi.h>
 #include <ESPAsyncWebServer.h>
+#include <esp_now.h>
+#include <WiFi.h>
 
 //note requires the following libaries to be installed:
 // https://github.com/me-no-dev/ESPAsyncWebServer
@@ -11,6 +13,25 @@
 // follows the example presented here: https://github.com/nkmakes/SMARS-esp32 & https://nkmakes.github.io/2020/09/02/esp32-tank-robot-joystick-http-web-control/
 // with elements of https://iotespresso.com/create-captive-portal-using-esp32/
 // used a simple javascript joystick created bo Roberto D'Amico https://www.cssscript.com/onscreen-joystick/
+
+typedef struct makers_controller_message {
+  int left_joy_y;
+  int left_joy_x;
+  int right_joy_y;
+  int right_joy_x;
+  int sw1;
+  int sw2;
+  int sw3;
+  int sw4;
+  int sw5;
+  int sw6;
+  int sw7;
+  int sw8;
+  int left_trig;
+  int right_trig;
+  int left_joy_sw;
+  int right_joy_sw;
+} makers_controller_message;
 
 const char* ssid = "Crab-Bot Web Interface"; //Enter SSID
 const char* password = ""; //Enter Password
@@ -23,6 +44,83 @@ AsyncWebServer webserver(80);
 int x_input = 0; 
 int y_input = 0; 
 int yaw_input = 0; 
+
+// Create a struct_message called myData
+makers_controller_message myData;
+
+//motor driver connections
+#define FL_DIR 14
+#define FL_PWM 13
+#define BL_DIR 18
+#define BL_PWM 17
+#define FR_DIR 25
+#define FR_PWM 23
+#define BR_DIR 22
+#define BR_PWM 21
+
+//PWM Channels
+#define FL_CHANNEL 0
+#define BL_CHANNEL 1
+#define FR_CHANNEL 2
+#define BR_CHANNEL 3
+
+//drive constants for inverse kinematics
+#define WHEEL_RADIUS 0.05
+#define BOT_WIDTH 0.410
+#define BOT_LENGTH 0.3
+
+#define A_CONST (1 / WHEEL_RADIUS)
+#define B_CONST (A_CONST)
+#define C_CONST (0.5 * ((BOT_WIDTH + BOT_LENGTH) / WHEEL_RADIUS))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*******************************************
  * The web page that is served to the connected device. 

@@ -10,61 +10,6 @@
    control crab-bot using two joysticks (buttons for sounds coming eventually)
 */
 
-
-#include <esp_now.h>
-#include <WiFi.h>
-
-typedef struct makers_controller_message {
-  int left_joy_y;
-  int left_joy_x;
-  int right_joy_y;
-  int right_joy_x;
-  int sw1;
-  int sw2;
-  int sw3;
-  int sw4;
-  int sw5;
-  int sw6;
-  int sw7;
-  int sw8;
-  int left_trig;
-  int right_trig;
-  int left_joy_sw;
-  int right_joy_sw;
-} makers_controller_message;
-
-
-// Create a struct_message called myData
-makers_controller_message myData;
-
-
-
-//motor driver connections
-#define FL_DIR 14
-#define FL_PWM 13
-#define BL_DIR 18
-#define BL_PWM 17
-#define FR_DIR 25
-#define FR_PWM 23
-#define BR_DIR 22
-#define BR_PWM 21
-
-//PWM Channels
-#define FL_CHANNEL 0
-#define BL_CHANNEL 1
-#define FR_CHANNEL 2
-#define BR_CHANNEL 3
-
-//drive constants for inverse kinematics
-#define WHEEL_RADIUS 0.05
-#define BOT_WIDTH 0.410
-#define BOT_LENGTH 0.3
-
-#define A_CONST (1 / WHEEL_RADIUS)
-#define B_CONST (A_CONST)
-#define C_CONST (0.5 * ((BOT_WIDTH + BOT_LENGTH) / WHEEL_RADIUS))
-
-
 void setup()
 {
   Serial.begin(115200);
@@ -76,7 +21,6 @@ void setup()
 
 }
 
-
 void loop()
 {
   //only thing in the loop, nothing actually
@@ -84,6 +28,25 @@ void loop()
   //If you want to do anything then it'll have to happen inside of onNewUserInput()
   //or create another thread.
   //  getWebInput()/;
+}
+
+
+void handleController(makers_controller_message controller_data) {
+  double yaw_rate = 0;
+  if (controller_data.left_trig)
+    yaw_rate = 1.0;
+  else if (controller_data.right_trig)
+    yaw_rate = -1.0;
+
+  double x_vel = ((controller_data.right_joy_x - 2048) / 4096.0);
+  double y_vel = ((controller_data.right_joy_y - 2048) / 4096.0);
+
+  if (abs(x_vel) < 0.05)
+    x_vel = 0;
+  if (abs(y_vel) < 0.05)
+    y_vel = 0;
+
+  inverseKinematics( x_vel, y_vel, yaw_rate);
 }
 
 
