@@ -5,6 +5,7 @@
 #include <ESPAsyncWebServer.h>
 #include <esp_now.h>
 #include <WiFi.h>
+#include <Adafruit_NeoPixel.h>
 
 //note requires the following libaries to be installed:
 // https://github.com/me-no-dev/ESPAsyncWebServer
@@ -73,7 +74,12 @@ makers_controller_message myData;
 #define B_CONST (A_CONST)
 #define C_CONST (0.5 * ((BOT_WIDTH + BOT_LENGTH) / WHEEL_RADIUS))
 
-
+//NEOPIXEL CONSTANTS
+// When we setup the NeoPixel library, we tell it how many pixels, and which pin to use to send signals.
+// Note that for older NeoPixel strips you might need to change the third parameter--see the strandtest
+#define NEOPIXEL_PIN 27
+#define NUM_NEOPIXEL 18
+Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUM_NEOPIXEL, NEOPIXEL_PIN, NEO_GRB + NEO_KHZ800);
 
 
 

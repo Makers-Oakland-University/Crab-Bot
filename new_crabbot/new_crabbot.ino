@@ -18,6 +18,7 @@ void setup()
 
   //  initWebControl();
   initESPNOW();
+  init_neopixels();
 
 }
 
@@ -27,7 +28,9 @@ void loop()
   //goes past this point
   //If you want to do anything then it'll have to happen inside of onNewUserInput()
   //or create another thread.
-  //  getWebInput()/;
+  //  getWebInput();
+  base_animation();
+  delay(3);
 }
 
 
