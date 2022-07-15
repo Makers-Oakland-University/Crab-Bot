@@ -15,8 +15,6 @@ void setup()
   Serial.begin(115200);
   initMotors();
   //  motor_test();
-
-  //  initWebControl();
   initESPNOW();
   init_neopixels();
 

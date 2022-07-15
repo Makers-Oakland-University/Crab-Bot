@@ -1,11 +1,13 @@
 #include <Arduino.h>
 #include "Arduino.h"
-#include <ArduinoWebsockets.h>
 #include <WiFi.h>
-#include <ESPAsyncWebServer.h>
 #include <esp_now.h>
 #include <WiFi.h>
 #include <Adafruit_NeoPixel.h>
+
+//#define USE_WEB_CONTROL
+
+#ifdef USE_WEB_CONTROL
 
 //note requires the following libaries to be installed:
 // https://github.com/me-no-dev/ESPAsyncWebServer
@@ -14,6 +16,20 @@
 // follows the example presented here: https://github.com/nkmakes/SMARS-esp32 & https://nkmakes.github.io/2020/09/02/esp32-tank-robot-joystick-http-web-control/
 // with elements of https://iotespresso.com/create-captive-portal-using-esp32/
 // used a simple javascript joystick created bo Roberto D'Amico https://www.cssscript.com/onscreen-joystick/
+
+/*with web control enabled you will still need to call the initWebControl() function in the startup of the sketch */
+
+#include <ArduinoWebsockets.h>
+#include <ESPAsyncWebServer.h>
+
+const char* ssid = "Crab-Bot Web Interface"; //Enter SSID
+const char* password = ""; //Enter Password
+
+using namespace websockets;
+WebsocketsServer server;
+AsyncWebServer webserver(80);
+
+#endif
 
 typedef struct makers_controller_message {
   int left_joy_y;
@@ -33,13 +49,6 @@ typedef struct makers_controller_message {
   int left_joy_sw;
   int right_joy_sw;
 } makers_controller_message;
-
-const char* ssid = "Crab-Bot Web Interface"; //Enter SSID
-const char* password = ""; //Enter Password
-
-using namespace websockets;
-WebsocketsServer server;
-AsyncWebServer webserver(80);
 
 //global variables that control crab bot 
 int x_input = 0; 

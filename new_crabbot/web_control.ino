@@ -1,6 +1,5 @@
 
-
-
+#ifdef USE_WEB_CONTROL
 // handle http messages
 //this converts the data taken from the user on the web page and parses it into
 //values that we are able to use in the rest of the code.
@@ -56,3 +55,4 @@ void getWebInput() {
     client.poll();
   }
 }
+#endif 
