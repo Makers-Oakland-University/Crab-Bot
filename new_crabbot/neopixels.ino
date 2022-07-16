@@ -48,3 +48,26 @@ void base_animation() {
   if (current_special_index < 0)
     animation_direction *= -1;
 }
+
+
+int spin_animation_current_countdown = NUM_NEOPIXEL / 2;
+
+
+void spin_animation() {
+
+  for (int a = 0; a < NUM_NEOPIXEL / 2; a++) {
+    if ((a) > (spin_animation_current_countdown % NUM_NEOPIXEL / 2)) {
+      setPixel(a, 0, 1.0, 0);
+      setPixel(a + spin_animation_current_countdown, 0, 1.0, 0);
+    }
+    else{
+      setPixel(a, 0.0, 0, 1.0);
+      setPixel(a + spin_animation_current_countdown, 0.0, 0, 1.0);
+    }
+  }
+  pixels.show();
+  spin_animation_current_countdown--;
+  if (spin_animation_current_countdown < 0)
+    spin_animation_current_countdown = NUM_NEOPIXEL;
+
+}

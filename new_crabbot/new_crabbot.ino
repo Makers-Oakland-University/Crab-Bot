@@ -27,8 +27,9 @@ void loop()
   //If you want to do anything then it'll have to happen inside of onNewUserInput()
   //or create another thread.
   //  getWebInput();
-  base_animation();
-  delay(3);
+  //  base_animation();
+  spin_animation();
+  delay(20);
 }
 
 
