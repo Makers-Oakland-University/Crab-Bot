@@ -1,7 +1,7 @@
 #include <Adafruit_NeoPixel.h>
 
-#define PIN 18
-#define NUM_LED 17
+#define PIN 27
+#define NUM_LED 60
 
 // When we setup the NeoPixel library, we tell it how many pixels, and which pin to use to send signals.
 // Note that for older NeoPixel strips you might need to change the third parameter--see the strandtest
@@ -24,8 +24,8 @@ void loop()
           pixels.setPixelColor(l, pixels.Color(i * 255, j * 255, k * 255)); // Moderately bright green color.
 
           pixels.show(); // This sends the updated pixel color to the hardware.
-          //        delay(1); // Delay for a period of time (in milliseconds).
         }
+        delay(200); // Delay for a period of time (in milliseconds).
       }
     }
   }
