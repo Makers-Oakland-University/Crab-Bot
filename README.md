@@ -17,11 +17,6 @@ A number of additional libraries are also required and can be found at the follo
 * [Adafruit Neopixel Library](https://github.com/adafruit/Adafruit_NeoPixel)
 * [Adafruit Soundboard](https://github.com/adafruit/Adafruit_Soundboard_library)
 
-There is an optional web control interface that is no longer supported, if you want to enable that interface you wil need to install the below libraires. **These libraries are not required by default.**
-* [ESP32 Async](https://github.com/me-no-dev/ESPAsyncWebServer)
-* [Async TCP](https://github.com/me-no-dev/AsyncTCP)
-* [Arduino Websockets](https://github.com/gilmaimon/ArduinoWebsockets)
-
 
 ## Contributing
 Makers at OU welcomes all OU students to join to work on fun and interactive projects. Contact us on [grizzorgs](https://oaklandu.campuslabs.com/engage/organization/makers-at-oakland-university)
