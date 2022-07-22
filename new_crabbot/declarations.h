@@ -17,7 +17,7 @@ MakersController receiver = MakersController();
 #define FL_DIR 14
 #define FL_PWM 13
 #define BL_DIR 18
-#define BL_PWM 17
+#define BL_PWM 15
 #define FR_DIR 25
 #define FR_PWM 23
 #define BR_DIR 22
