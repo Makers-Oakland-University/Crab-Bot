@@ -1,27 +1,40 @@
-
 //constants and declarations in declarations.h
+
+/* This tab is intended to contain all of the NEOPIXEL
+    animations that are created to be shown on crab-bot.
+    The animations created here can be called by the play_animation()
+
+
+    ANIMATION IDENTIFIERS DEFINED IN DECLARATIONS.H
+*/
+
+int current_animation = 0;
+
+void setAnimation(int value) {
+  current_animation = value;
+}
+
+void nextAnimation() {
+  current_animation++;
+}
+
+void play_animation() {
+  switch (current_animation) {
+    case CRABBOT_STANDARD_ANIMATION:
+      standard_animation();
+      break;
+    case CRABBOT_SPLIT_ANIMATION:
+      split_animation();
+      break;
+    default:
+      Serial.printf("No animation available for value %d\n", current_animation);
+      current_animation = 0;
+      break;
+  }
+}
 
 void init_neopixels() {
   pixels.begin(); // This initializes the NeoPixel library.
-}
-
-void quick_pattern() {
-  // pixels.Color takes RGB values, from 0,0,0 up to 255,255,255
-  for (int i = 0; i < 2; i++) {
-    for (int j = 0; j < 2; j++) {
-      for (int k = 0; k < 2; k++) {
-        for (int l = 0; l < NUM_NEOPIXEL; l++) {
-
-          pixels.setPixelColor(l, pixels.Color(i * 255, j * 255, k * 255)); // Moderately bright green color.
-
-          pixels.show(); // This sends the updated pixel color to the hardware.
-          //        delay(1); // Delay for a period of time (in milliseconds).
-
-        }
-        delay(100);
-      }
-    }
-  }
 }
 
 //value range 0 - 1
@@ -29,45 +42,44 @@ void setPixel(int index, float red, float blue, float green) {
   pixels.setPixelColor(index, pixels.Color(red * 255, blue * 255, green * 255));
 }
 
-int current_special_index = 0;
-int animation_direction = -1;
 
-void base_animation() {
-  for (int a = 0; a < NUM_NEOPIXEL; a++) {
-    if (a > current_special_index)
-      setPixel(a, 1.0, 0.1, 0);
-    //setPixel(a, 0, 0, 1.0);
-    else
+
+//for animations please create a function that increments the animation every time it's called
+//this way the animation can be triggerred without locking the thread.
+/********************************
+      STANDARD ANIMATION
+ ********************************/
+int standard_animation_count = 0;
+int standard_animation_delta = 1;
+void standard_animation() {
+  for (int a = 0; a < NUM_NEOPIXEL; a++)
+    if (a == standard_animation_count)
       setPixel(a, 1.0, 0, 0);
-  }
+    else if (abs(a - standard_animation_count) < 4)
+      setPixel(a, 0.04, 0, 0);
+    else
+      setPixel(a, 0.05, 0.01, 0.0);
+  standard_animation_count += standard_animation_delta;
   pixels.show();
 
-  current_special_index += animation_direction;
-  if (current_special_index > NUM_NEOPIXEL)
-    animation_direction *= -1;
-  if (current_special_index < 0)
-    animation_direction *= -1;
+  if (standard_animation_count > NUM_NEOPIXEL || standard_animation_count < 0)
+    standard_animation_delta *= -1;
 }
 
-
-int spin_animation_current_countdown = NUM_NEOPIXEL / 2;
-
-
-void spin_animation() {
-
-  for (int a = 0; a < NUM_NEOPIXEL / 2; a++) {
-    if ((a) > (spin_animation_current_countdown % NUM_NEOPIXEL / 2)) {
-      setPixel(a, 0, 1.0, 0);
-      setPixel(a + spin_animation_current_countdown, 0, 1.0, 0);
-    }
-    else{
-      setPixel(a, 0.0, 0, 1.0);
-      setPixel(a + spin_animation_current_countdown, 0.0, 0, 1.0);
-    }
+/********************************
+      Split ANIMATION
+ ********************************/
+int split_animation_count = 0;
+void split_animation() {
+  for (int a = 0; a < NUM_NEOPIXEL; a++) {
+    setPixel(a, 0, 0, 0);
   }
-  pixels.show();
-  spin_animation_current_countdown--;
-  if (spin_animation_current_countdown < 0)
-    spin_animation_current_countdown = NUM_NEOPIXEL;
 
+  setPixel(NUM_NEOPIXEL / 2 - split_animation_count, 1, 0, 0);
+  setPixel(NUM_NEOPIXEL / 2 + split_animation_count, 1, 0, 0);
+
+  if (split_animation_count > NUM_NEOPIXEL / 2)
+    split_animation_count = 0;
+  split_animation_count++;
+  pixels.show();
 }

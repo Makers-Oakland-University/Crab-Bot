@@ -1,3 +1,8 @@
+/* Everything to do with movement of the 4 wheels in crab-bot 
+ * 
+ * This does not cover the other movements of crab-bot 
+ */
+
 void initMotors() {
   pinMode(FL_DIR, OUTPUT);
   pinMode(FL_PWM, OUTPUT);

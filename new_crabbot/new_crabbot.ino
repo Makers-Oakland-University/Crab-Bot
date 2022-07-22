@@ -1,22 +1,26 @@
 #include "declarations.h" //important info in this file. if you can't compile look here
 
+
 void setup()
 {
   Serial.begin(115200);
 
   initMotors();
+
+  //if you're working on the motors and want to have each one activate individually
+  //to verify that everything's connected correty then use this function
   //  motor_test();
 
   initMakersReceiver();
   init_neopixels();
 
+  setAnimation(CRABBOT_STANDARD_ANIMATION); 
+
 }
 
 void loop()
 {
-  //neopixel animations
-  //  base_animation();
-  spin_animation();
-  //  quick_pattern();
-  delay(20);
+
+  play_animation();  
+  delay(10);
 }
