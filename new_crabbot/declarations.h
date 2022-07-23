@@ -4,7 +4,7 @@
 #include <esp_now.h>
 #include <Adafruit_NeoPixel.h>
 #include <makers_controller.h>
-
+#include "Adafruit_Soundboard.h"
 
 /*********************************************
  *           MAKERS CONTROLLER 
@@ -12,6 +12,12 @@
 //create receiver object that is going to be our way to get data
 MakersController receiver = MakersController();
 
+//soundboard connection (Serial2) 
+//soundboard TX -> ESP32 16
+//soundboard RX -> ESP32 17
+#define SOUND_BOARD_RST 26
+
+Adafruit_Soundboard sfx = Adafruit_Soundboard(&Serial2, NULL, 26);
 
 //motor driver connections
 #define FL_DIR 14

@@ -13,14 +13,15 @@ void setup()
 
   initMakersReceiver();
   init_neopixels();
+  initSound();
 
-  setAnimation(CRABBOT_STANDARD_ANIMATION); 
+  setAnimation(CRABBOT_STANDARD_ANIMATION);
 
 }
 
 void loop()
 {
 
-  play_animation();  
+  play_animation();
   delay(10);
 }

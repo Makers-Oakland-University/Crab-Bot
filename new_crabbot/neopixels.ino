@@ -34,7 +34,9 @@ void play_animation() {
 }
 
 void init_neopixels() {
+  Serial.print("Starting Neopixels...");
   pixels.begin(); // This initializes the NeoPixel library.
+  Serial.println("Done"); 
 }
 
 //value range 0 - 1

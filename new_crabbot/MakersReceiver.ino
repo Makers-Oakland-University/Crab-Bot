@@ -18,24 +18,24 @@ void joystick_callback(float left_x, float left_y, float right_x, float right_y)
 
 
 //Switch 1 callback, enable below by uncommenting register button callback
-//void sw1_callback(int state) {
-//  Serial.println("Switch 1 state changed");
-//}
+void sw1_callback(int state) {
+  playTrack(1);
+}
 
 //Switch 2 callback, enable below by uncommenting register button callback
-//void sw2_callback(int state) {
-//  Serial.println("Switch 2 state changed");
-//}
+void sw2_callback(int state) {
+  playTrack(2);
+}
 
 //Switch 3 callback, enable below by uncommenting register button callback
-//void sw3_callback(int state) {
-//  Serial.println("Switch 3 state changed");
-//}
+void sw3_callback(int state) {
+  playTrack(3);
+}
 
 //Switch 4 callback, enable below by uncommenting register button callback
-//void sw4_callback(int state) {
-//  Serial.println("Switch 4 state changed");
-//}
+void sw4_callback(int state) {
+  playTrack(4);
+}
 
 //Switch 5 callback, enable below by unco/mmenting register button callback
 void sw5_callback(int state) {
@@ -95,10 +95,10 @@ void initMakersReceiver() {
 
   */
 
-  //  receiver.registerButtonCallback(MAKERS_CONTROLLER_SW1, sw1_callback); //Switch 1
-  //  receiver.registerButtonCallback(MAKERS_CONTROLLER_SW2, sw2_callback); //Switch 2
-  //  receiver.registerButtonCallback(MAKERS_CONTROLLER_SW3, sw3_callback); //Switch 3
-  //  receiver.registerButtonCallback(MAKERS_CONTROLLER_SW4, sw4_callback); //Switch 4
+  receiver.registerButtonCallback(MAKERS_CONTROLLER_SW1, sw1_callback); //Switch 1
+  receiver.registerButtonCallback(MAKERS_CONTROLLER_SW2, sw2_callback); //Switch 2
+  receiver.registerButtonCallback(MAKERS_CONTROLLER_SW3, sw3_callback); //Switch 3
+  receiver.registerButtonCallback(MAKERS_CONTROLLER_SW4, sw4_callback); //Switch 4
   receiver.registerButtonCallback(MAKERS_CONTROLLER_SW5, sw5_callback); //Switch 5
   //  receiver.registerButtonCallback(MAKERS_CONTROLLER_SW6, sw6_callback); //Switch 6
   //  receiver.registerButtonCallback(MAKERS_CONTROLLER_SW7, sw7_callback); //Switch 7
