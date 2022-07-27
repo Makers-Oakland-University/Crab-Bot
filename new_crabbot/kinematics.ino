@@ -99,7 +99,7 @@ void inverseKinematics(double x, double y, double yaw) {
   //if you're wondering why these are reversed, I have no idea.
   double x_vel = y / 10.0 ;
   double y_vel = (x / 10.0);
-  double psi = (yaw / 10.0);
+  double psi = (yaw / 5.0);
 
   double w1 = A_CONST * x_vel - B_CONST * y_vel - C_CONST * psi;
   double w2 = A_CONST * x_vel + B_CONST * y_vel - C_CONST * psi;

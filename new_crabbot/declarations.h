@@ -44,6 +44,8 @@ Adafruit_Soundboard sfx = Adafruit_Soundboard(&Serial2, NULL, 26);
 #define B_CONST (A_CONST)
 #define C_CONST (0.5 * ((BOT_WIDTH + BOT_LENGTH) / WHEEL_RADIUS))
 
+boolean crab_rave_mode = false;
+
 
 /*********************************************
  *                NEOPIXEL 

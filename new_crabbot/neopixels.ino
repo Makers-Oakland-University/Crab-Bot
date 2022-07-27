@@ -36,7 +36,7 @@ void play_animation() {
 void init_neopixels() {
   Serial.print("Starting Neopixels...");
   pixels.begin(); // This initializes the NeoPixel library.
-  Serial.println("Done"); 
+  Serial.println("Done");
 }
 
 //value range 0 - 1
@@ -83,5 +83,21 @@ void split_animation() {
   if (split_animation_count > NUM_NEOPIXEL / 2)
     split_animation_count = 0;
   split_animation_count++;
+  pixels.show();
+}
+
+
+/********************************
+      CRAB RAVE ANIMATION
+ ********************************/
+int crab_rave_counter = 0;
+
+void crab_rave_animation() {
+  for (int a = 0; a < NUM_NEOPIXEL; a++) {
+    setPixel((a + crab_rave_counter) % NUM_NEOPIXEL, ( a & 0x04) >> 2 ,0, (a & 0x01));
+  }
+
+  Serial.printf("crab_rave_counter %d\n",crab_rave_counter);  
+  crab_rave_counter++;
   pixels.show();
 }

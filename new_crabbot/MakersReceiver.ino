@@ -34,7 +34,9 @@ void sw3_callback(int state) {
 
 //Switch 4 callback, enable below by uncommenting register button callback
 void sw4_callback(int state) {
-  playTrack(4);
+  crab_rave_mode = state;
+  if (!state)
+    stopTrack();
 }
 
 //Switch 5 callback, enable below by unco/mmenting register button callback

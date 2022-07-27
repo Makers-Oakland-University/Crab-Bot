@@ -21,3 +21,7 @@ void playTrack(int num) {
     Serial.println("Failed to play track, check connections to soundboard");
 
 }
+
+void stopTrack(){
+  sfx.stop();
+}
