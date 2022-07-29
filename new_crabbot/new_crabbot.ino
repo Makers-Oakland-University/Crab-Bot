@@ -21,10 +21,10 @@ void setup()
 
 void loop()
 {
-
-  play_animation();
   delay(10);
 
   if (crab_rave_mode)
     crab_rave();
+  else
+    play_animation();
 }

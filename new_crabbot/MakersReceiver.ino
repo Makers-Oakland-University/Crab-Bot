@@ -35,8 +35,10 @@ void sw3_callback(int state) {
 //Switch 4 callback, enable below by uncommenting register button callback
 void sw4_callback(int state) {
   crab_rave_mode = state;
-  if (!state)
+  if (!state) {
     stopTrack();
+    inverseKinematics(0, 0, 0);
+  }
 }
 
 //Switch 5 callback, enable below by unco/mmenting register button callback

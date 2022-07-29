@@ -46,7 +46,7 @@ void setup() {
   //must have the device's MAC address, when startReceiver() is called for the target device
   //the MAC address will be printed to the serial terminal, that can be coppied here.
   //the MAC address should be in a similar format to below
-  String targetDeviceMAC = "78:E3:6D:0A:05:40";
+  String targetDeviceMAC = "78:E3:6D:10:DB:40";
 
   //start the controller and give it the address of the target
   controller.startController(targetDeviceMAC);
