@@ -1,7 +1,7 @@
-/* Everything to do with movement of the 4 wheels in crab-bot 
- * 
- * This does not cover the other movements of crab-bot 
- */
+/* Everything to do with movement of the 4 wheels in crab-bot
+
+   This does not cover the other movements of crab-bot
+*/
 
 void initMotors() {
   pinMode(FL_DIR, OUTPUT);
@@ -93,8 +93,17 @@ void motor_test() {
   inverseKinematics(0, 0, 0);
 }
 
+
+//checks
+void checkMotors() {
+  if (receiver.getLastMessageAge() > 1000)
+    inverseKinematics(0, 0, 0);
+}
+
 //convert x,y, and angular velocity to the values needed in order to move crab bot
 void inverseKinematics(double x, double y, double yaw) {
+
+  last_motor_update = millis();
 
   //if you're wondering why these are reversed, I have no idea.
   double x_vel = y / 10.0 ;
@@ -117,7 +126,7 @@ void driveMotors(float front_left, float back_left, float back_right, float fron
   //constrain the motor values across their normal range.
   float fl, bl, br, fr;
 
-  //if any of the values given are above 1 then we have to normalize all the values to ensure that crabbot 
+  //if any of the values given are above 1 then we have to normalize all the values to ensure that crabbot
   if ( abs(front_left) > 1.0 || abs(back_left) > 1.0 || abs(back_right) > 1.0 || abs(front_right) > 1.0) {
 
     //normalize the values

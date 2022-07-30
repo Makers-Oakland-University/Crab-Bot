@@ -19,17 +19,17 @@ void joystick_callback(float left_x, float left_y, float right_x, float right_y)
 
 //Switch 1 callback, enable below by uncommenting register button callback
 void sw1_callback(int state) {
-  playTrack(1);
+  playTrack(4);
 }
 
 //Switch 2 callback, enable below by uncommenting register button callback
 void sw2_callback(int state) {
-  playTrack(2);
+  playTrack(5);
 }
 
 //Switch 3 callback, enable below by uncommenting register button callback
 void sw3_callback(int state) {
-  playTrack(3);
+  playTrack(6);
 }
 
 //Switch 4 callback, enable below by uncommenting register button callback

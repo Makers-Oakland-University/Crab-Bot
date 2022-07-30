@@ -29,6 +29,11 @@ Adafruit_Soundboard sfx = Adafruit_Soundboard(&Serial2, NULL, 26);
 #define BR_DIR 22
 #define BR_PWM 21
 
+
+
+/***********************************
+ *    MOTORS and DRIVE CONSTANTS
+ ***********************************/
 //PWM Channels
 #define FL_CHANNEL 0
 #define BL_CHANNEL 1
@@ -43,6 +48,8 @@ Adafruit_Soundboard sfx = Adafruit_Soundboard(&Serial2, NULL, 26);
 #define A_CONST (1 / WHEEL_RADIUS)
 #define B_CONST (A_CONST)
 #define C_CONST (0.5 * ((BOT_WIDTH + BOT_LENGTH) / WHEEL_RADIUS))
+
+unsigned long last_motor_update = 0; 
 
 boolean crab_rave_mode = false;
 
