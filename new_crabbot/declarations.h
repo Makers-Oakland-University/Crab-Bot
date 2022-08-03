@@ -5,6 +5,8 @@
 #include <Adafruit_NeoPixel.h>
 #include <makers_controller.h>
 #include "Adafruit_Soundboard.h"
+#include <Wire.h>
+#include <Adafruit_PWMServoDriver.h>
 
 /*********************************************
  *           MAKERS CONTROLLER 
@@ -26,10 +28,15 @@ Adafruit_Soundboard sfx = Adafruit_Soundboard(&Serial2, NULL, 26);
 #define BL_PWM 15
 #define FR_DIR 25
 #define FR_PWM 23
-#define BR_DIR 22
-#define BR_PWM 21
+#define BR_DIR 19
+#define BR_PWM 12
 
+/***********************************
+ *         PWM SERVO BOARD
+ ***********************************/
 
+#define I2C_SDA 21
+#define I2C_SCL 22
 
 /***********************************
  *    MOTORS and DRIVE CONSTANTS

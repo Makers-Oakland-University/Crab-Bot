@@ -14,6 +14,10 @@ void joystick_callback(float left_x, float left_y, float right_x, float right_y)
   float clipped_right_x = (abs(right_x) > 0.14) ? right_x : 0.0;
 
   inverseKinematics(clipped_left_x, clipped_left_y, clipped_right_x);
+
+  double eye_position = (right_y + 1.0) * 90;
+  setLeftEye(eye_position);
+  setRightEye(eye_position);
 }
 
 

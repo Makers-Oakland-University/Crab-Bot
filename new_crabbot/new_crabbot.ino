@@ -14,6 +14,7 @@ void setup()
   initMakersReceiver();
   init_neopixels();
   initSound();
+  init_pwm_board();
 
   setAnimation(CRABBOT_STANDARD_ANIMATION);
 

@@ -16,6 +16,7 @@ A number of additional libraries are also required and can be found at the follo
 * [Makers Unified Controller Arduino Library](https://github.com/Makers-Oakland-University/Makers-Unified-Controller-Arduino)
 * [Adafruit Neopixel Library](https://github.com/adafruit/Adafruit_NeoPixel)
 * [Adafruit Soundboard](https://github.com/adafruit/Adafruit_Soundboard_library)
+* [Adafruit PWM Servo Driver](https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library)
 
 
 ## Contributing
