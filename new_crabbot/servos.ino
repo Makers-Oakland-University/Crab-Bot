@@ -10,6 +10,8 @@ void init_pwm_board() {
   Wire.begin(I2C_SDA, I2C_SCL);
   PCA9685.begin();
   PCA9685.setPWMFreq(60);
+  setLeftEye(90); 
+  setRightEye(90);
 }
 
 void setServo(int servo_num, double position) {
