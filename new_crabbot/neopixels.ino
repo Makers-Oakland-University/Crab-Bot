@@ -26,6 +26,9 @@ void play_animation() {
     case CRABBOT_SPLIT_ANIMATION:
       split_animation();
       break;
+    case CRABBOT_CONTROLS_ANIMATION:
+      controller_input_animtion();
+      break;
     default:
       Serial.printf("No animation available for value %d\n", current_animation);
       current_animation = 0;
@@ -88,16 +91,27 @@ void split_animation() {
 
 
 /********************************
+    CONTROLLER INPUT ANIMTION
+ ********************************/
+
+void controller_input_animtion() {
+  for (int a = 0; a < NUM_NEOPIXEL; a++) {
+    setPixel(a, abs(receiver.readLeftJoystickX()), abs(receiver.readLeftJoystickY()), abs(receiver.readRightJoystickX() ));
+  }
+  pixels.show();
+}
+
+/********************************
       CRAB RAVE ANIMATION
  ********************************/
 int crab_rave_counter = 0;
 
 void crab_rave_animation() {
   for (int a = 0; a < NUM_NEOPIXEL; a++) {
-    setPixel((a + crab_rave_counter) % NUM_NEOPIXEL, ( a & 0x04) >> 2 ,0, (a & 0x01));
+    setPixel((a + crab_rave_counter) % NUM_NEOPIXEL, ( a & 0x04) >> 2 , 0, (a & 0x01));
   }
 
-  Serial.printf("crab_rave_counter %d\n",crab_rave_counter);  
+  Serial.printf("crab_rave_counter %d\n", crab_rave_counter);
   crab_rave_counter++;
   pixels.show();
 }
