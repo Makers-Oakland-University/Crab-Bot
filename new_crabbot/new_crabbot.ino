@@ -29,11 +29,13 @@ void loop()
   else
     play_animation();
 
-//  for(int a = 0; a < 10; a++){
-//    Serial.println("Playing Track #" + String(a));
-//    playTrack(a); 
-//    delay(2000); 
-//  }
+  updateEyes();
+
+  //  for(int a = 0; a < 10; a++){
+  //    Serial.println("Playing Track #" + String(a));
+  //    playTrack(a);
+  //    delay(2000);
+  //  }
 
 
   //call checkmotors() this will cause crabbot to come to a full stop in

@@ -10,7 +10,7 @@ void init_pwm_board() {
   Wire.begin(I2C_SDA, I2C_SCL);
   PCA9685.begin();
   PCA9685.setPWMFreq(60);
-  setLeftEye(90); 
+  setLeftEye(90);
   setRightEye(90);
 }
 
@@ -26,18 +26,31 @@ int angleToPulse(int ang) {
 
 
 /* Interface function for the left and right eye
- *  these eyes must be kept in a specific region and these functions implement
- *  that restriction. driving the servos manually from outside this function is 
- *  NOT RECOMMENDED. 
- */
-void setLeftEye(double position) {
+    these eyes must be kept in a specific region and these functions implement
+    that restriction. driving the servos manually from outside this function is
+    NOT RECOMMENDED.
+*/
+double left_eye_position = 90.0;
+double right_eye_position = 90.0;
+double left_eye_desired_position = 90.0;
+double right_eye_desired_position = 90.0;
+
+void updateEyes() {
+  left_eye_position += 0.024 * (left_eye_desired_position - left_eye_position);
   setServo(
     CRAB_BOT_LEFT_EYE_SERVO_BOARD_PIN,
-    constrain(position, 90 - 23, 90 + 23));
+    constrain(left_eye_position, 90 - 70, 90 + 70));
+
+  right_eye_position += 0.024 * (right_eye_desired_position - right_eye_position);
+  setServo(
+    CRAB_BOT_RIGHT_EYE_SERVO_BOARD_PIN,
+    constrain(right_eye_position, 90 - 70, 90 + 70));
+}
+
+void setLeftEye(double position) {
+  left_eye_desired_position = position;
 }
 
 void setRightEye(double position) {
-  setServo(
-    CRAB_BOT_RIGHT_EYE_SERVO_BOARD_PIN,
-    constrain(position, 90 - 23, 90 + 23));
+  right_eye_desired_position = position;
 }
