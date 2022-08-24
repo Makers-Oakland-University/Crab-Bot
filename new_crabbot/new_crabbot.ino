@@ -30,13 +30,13 @@ void loop()
     play_animation();
 
   updateEyes();
+  updateServos();
 
   //  for(int a = 0; a < 10; a++){
   //    Serial.println("Playing Track #" + String(a));
   //    playTrack(a);
   //    delay(2000);
   //  }
-
 
   //call checkmotors() this will cause crabbot to come to a full stop in
   //the event that it doesn't receive controller commands within a second.

@@ -67,25 +67,25 @@ void sw5_callback(int state) {
 //}
 
 //Left joystick button, enable below by uncommenting register button callback
-//void left_joystick_button_callback(int state) {
-//  Serial.println("Switch on left joystick state changed");
-//}
+void left_joystick_button_callback(int state) {
+  setLeftClawPincher(90 *  state + 70);
+}
 
 //Right joystick button, enable below by uncommenting register button callback
-//void right_joystick_button_callback(int state) {
-//  Serial.println("Switch on right joystick state changed");
-//}
+void right_joystick_button_callback(int state) {
+  setRightClawPincher(-90 * state + 98);
+}
 
 
 //left trigger callback, enable below by uncommenting register button callback
-//void left_trigger_callback(int state) {
-//  Serial.println("left trigger state changed");
-//}
+void left_trigger_callback(int state) {
+  setLeftClawArm(90 * state + 90);
+}
 
 //left trigger callback, enable below by uncommenting register button callback
-//void right_trigger_callback(int state) {
-//  Serial.println("right trigger state changed");
-//}
+void right_trigger_callback(int state) {
+  setRightClawArm(-90 * state + 90);
+}
 
 void initMakersReceiver() {
   receiver.startReceiver();
@@ -111,10 +111,10 @@ void initMakersReceiver() {
   //  receiver.registerButtonCallback(MAKERS_CONTROLLER_SW6, sw6_callback); //Switch 6
   //  receiver.registerButtonCallback(MAKERS_CONTROLLER_SW7, sw7_callback); //Switch 7
   //  receiver.registerButtonCallback(MAKERS_CONTROLLER_SW8, sw8_callback); //Switch 8
-  //  receiver.registerButtonCallback(MAKERS_CONTROLLER_SW_L_JOY, left_joystick_button_callback); //Button on left joystick
-  //  receiver.registerButtonCallback(MAKERS_CONTROLLER_SW_R_JOY, right_joystick_button_callback); //Button on right joystick
-  //  receiver.registerButtonCallback(MAKERS_CONTROLLER_SW_L_TRIG, left_trigger_callback); //Button on right joystick
-  //  receiver.registerButtonCallback(MAKERS_CONTROLLER_SW_R_TRIG, right_trigger_callback); //Button on right joystick
+  receiver.registerButtonCallback(MAKERS_CONTROLLER_SW_L_JOY, left_joystick_button_callback); //Button on left joystick
+  receiver.registerButtonCallback(MAKERS_CONTROLLER_SW_R_JOY, right_joystick_button_callback); //Button on right joystick
+  receiver.registerButtonCallback(MAKERS_CONTROLLER_SW_L_TRIG, left_trigger_callback); //Button on right joystick
+  receiver.registerButtonCallback(MAKERS_CONTROLLER_SW_R_TRIG, right_trigger_callback); //Button on right joystick
 
 
 }
