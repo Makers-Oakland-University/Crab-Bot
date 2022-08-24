@@ -19,7 +19,12 @@ void crab_rave() {
 
   float motor_drive = (millis() % CRAB_RAVE_LEFT_RIGHT_TIME) / ((float) CRAB_RAVE_LEFT_RIGHT_TIME) ;
   float drive_sin = sin(motor_drive * 2 * PI);
-  drive_sin *= 0.35;
+  drive_sin *= 0.50;
+
+  setRightClawArm(-90 * 0.75 * sin(motor_drive * 1.85 * PI) + 90); 
+  setLeftClawArm(-90 * 0.75 * sin(motor_drive * 2 * PI) + 90); 
+
+
 
   Serial.println(drive_sin);
   inverseKinematics(
