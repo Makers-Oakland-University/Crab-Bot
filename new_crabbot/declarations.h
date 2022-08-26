@@ -68,6 +68,7 @@ boolean crab_rave_mode = false;
 #define CRABBOT_STANDARD_ANIMATION 0
 #define CRABBOT_SPLIT_ANIMATION 1
 #define CRABBOT_CONTROLS_ANIMATION 2
+#define CRABBOT_SINE_ANIMATION 3
  
 // When we setup the NeoPixel library, we tell it how many pixels, and which pin to use to send signals.
 // Note that for older NeoPixel strips you might need to change the third parameter--see the strandtest

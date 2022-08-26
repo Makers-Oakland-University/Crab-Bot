@@ -42,6 +42,10 @@ void sw4_callback(int state) {
   if (!state) {
     stopTrack();
     inverseKinematics(0, 0, 0);
+    setLeftClawArm(90); 
+    setRightClawArm(90); 
+    setRightClawPincher(90); 
+    setLeftClawArm(90); 
   }
 }
 

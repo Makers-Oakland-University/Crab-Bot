@@ -29,6 +29,9 @@ void play_animation() {
     case CRABBOT_CONTROLS_ANIMATION:
       controller_input_animtion();
       break;
+    case CRABBOT_SINE_ANIMATION:
+      crab_sine_animation();
+      break;
     default:
       Serial.printf("No animation available for value %d\n", current_animation);
       current_animation = 0;
@@ -113,5 +116,29 @@ void crab_rave_animation() {
 
   Serial.printf("crab_rave_counter %d\n", crab_rave_counter);
   crab_rave_counter++;
+  pixels.show();
+}
+/********************************
+      CRAB SINE ANIMATION
+ ********************************/
+
+float crab_sine_counter = 0.0; 
+
+void crab_sine_animation() {
+
+  //increment the counter in order to step the sine wave animation by a small fraction
+  //the below variable is represented in radians which is fed into the sine function 
+  //in order to generate appropriate brighness values
+  crab_sine_counter += 0.00005; 
+
+  for(int a = 0; a < NUM_NEOPIXEL; a++){
+      //good luck
+      float drive_green = sin(crab_sine_counter + (a *  0.00005))/0.005 + 0.005; 
+      float drive_blue = sin(crab_sine_counter + ((a + NUM_NEOPIXEL/3) *  0.00005))/0.005 + 0.005; 
+      float drive_red = sin(crab_sine_counter + ((a + 2 * NUM_NEOPIXEL/3) *  0.00005))/0.005 + 0.005; 
+
+      //set the values
+      setPixel(a, drive_red, drive_green, drive_blue); 
+  }
   pixels.show();
 }
