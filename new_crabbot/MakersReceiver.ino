@@ -9,11 +9,15 @@
 
 
 void joystick_callback(float left_x, float left_y, float right_x, float right_y) {
-  float clipped_left_x = (abs(left_x) > 0.14) ? left_x : 0.0;
-  float clipped_left_y = (abs(left_y) > 0.14) ? left_y : 0.0;
-  float clipped_right_x = (abs(right_x) > 0.14) ? right_x : 0.0;
+  //deadzones (ternary operator '?' operates like an if statement (condition) ? if true : if false)
+  float clipped_left_x = (abs(left_x) > 0.02) ? left_x : 0.0;
+  float clipped_left_y = (abs(left_y) > 0.02) ? left_y : 0.0;
+  float clipped_right_x = (abs(right_x) > 0.02) ? right_x : 0.0;
 
-  inverseKinematics(clipped_left_x, clipped_left_y, clipped_right_x);
+  //use the 3rd power of the inputs, since these are on range -1 to 1 the scale stays the same,
+  //this introduces a nonlinearity that makes small joystick values smaller and larger joystick values larger. 
+  //the idea is to allow for the user to more accurately control crabbot at a low speed. 
+  inverseKinematics(pow(clipped_left_x,3) , pow(clipped_left_y, 3), pow(clipped_right_x, 3));
 
   double eye_position = (right_y + 1.0) * 90;
   setLeftEye(eye_position);
