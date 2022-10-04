@@ -29,7 +29,7 @@ Adafruit_Soundboard sfx = Adafruit_Soundboard(&Serial2, NULL, 26);
 #define FR_DIR 25
 #define FR_PWM 23
 #define BR_DIR 19
-#define BR_PWM 12
+#define BR_PWM 33
 
 /***********************************
  *         PWM SERVO BOARD
