@@ -23,6 +23,8 @@ void init_pwm_board() {
   Wire.begin(I2C_SDA, I2C_SCL);
   PCA9685.begin();
   PCA9685.setPWMFreq(60);
+
+  Serial.println("Servo board initialized!"); 
   setLeftEye(90);
   setRightEye(90);
   for (int a = 0; a < 16; a++)
@@ -61,12 +63,12 @@ double left_eye_desired_position = 90.0;
 double right_eye_desired_position = 90.0;
 
 void updateEyes() {
-  left_eye_position += 0.024 * (left_eye_desired_position - left_eye_position);
+  left_eye_position += 0.1 * (left_eye_desired_position - left_eye_position);
   setServo(
     CRAB_BOT_LEFT_EYE_SERVO_BOARD_PIN,
     constrain(left_eye_position, 90 - 70, 90 + 70));
 
-  right_eye_position += 0.024 * (right_eye_desired_position - right_eye_position);
+  right_eye_position += 0.1 * (right_eye_desired_position - right_eye_position);
   setServo(
     CRAB_BOT_RIGHT_EYE_SERVO_BOARD_PIN,
     constrain(right_eye_position, 90 - 70, 90 + 70));

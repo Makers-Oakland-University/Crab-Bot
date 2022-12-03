@@ -115,7 +115,7 @@ void inverseKinematics(double x, double y, double yaw) {
   double w3 = A_CONST * x_vel - B_CONST * y_vel + C_CONST * psi;
   double w4 = A_CONST * x_vel + B_CONST * y_vel + C_CONST * psi;
 
-  Serial.printf("Driving motors (%f, %f, %f, %f)\n", w1, w2, w3, w4);
+//  Serial.printf("Dri/ving motors (%f, %f, %f, %f)\n", w1, w2, w3, w4);
 
   driveMotors( w1, w2, w3, w4);
 }
@@ -147,7 +147,7 @@ void driveMotors(float front_left, float back_left, float back_right, float fron
     fr = front_right;
   }
 
-  Serial.printf("Driving motors (front-left %f, back-left %f, back-right %f, front-right %f)\n", fl, bl, br, fr);
+///  Serial.printf("Driving motors (front-left %f, back-left %f, back-right %f, front-right %f)\n", fl, bl, br, fr);
 
   //set direction and PWM for each motor
   //set PWM based on value from -1 to 1
